@@ -7,6 +7,13 @@ class Etiqueta(models.Model):
     def __str__(self):
         return self.nombre
 
+class Prioridad(models.Model):
+    nombre = models.CharField(max_length=50)
+    nivel = models.IntegerField()
+
+    def __str__(self):
+        return f"{self.nombre} (Nivel {self.nivel})"
+
 class Tarea(models.Model):
     titulo = models.CharField(max_length=100)
     descripcion = models.TextField()
