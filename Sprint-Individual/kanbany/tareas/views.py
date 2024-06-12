@@ -1,7 +1,7 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from .models import Tarea
+from .models import Tarea, Etiqueta, Prioridad
 from .forms import TareaForm
 
 # Create your views here.
@@ -39,6 +39,14 @@ def tarea_edit(request, pk):
 
 @login_required
 def tarea_delete(request, pk):
-    tarea = Tarea.objects.get(pk=pk)
-    tarea.delete()
-    return redirect('tarea_list')
+    tarea = get_object_or_404(Tarea, pk=pk)
+    if request.method == 'POST':
+        tarea.delete()
+        return redirect('tarea_list')
+     return render(request, 'tareas/delete.html', {'tarea': tarea})
+
+@login_required
+def tarea_detail(request, pk):
+    tarea = get_object_or_404(Tarea, pk=pk)
+    return render(request, 'tasks/detail.html', {'tarea': tarea})
+
