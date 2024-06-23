@@ -1,0 +1,42 @@
+@import url("/static/root/style/global-var.css");
+@import url('https://fonts.googleapis.com/css2?family=Jersey+15&display=swap');
+body{
+    background-color: var(--color4);
+    font-family: "Jersey 15", sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    margin: 0px;
+    color: var(--font2);
+}
+.container{
+    background-color: var(--color2);
+    padding: 10vh 10vw 10vh 10vw;
+    border-radius: 10px;
+    border-color: var(--color5);
+    border-width: 10px;
+    border-style: solid;
+}
+form{
+    display: flex;
+    flex-direction: column;
+}
+.bottom-layer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.bottom-layer a{
+    display: flex;
+    font-size: 15px;
+    align-items: center;
+}
+.bottom-layer button{
+    color: white;
+    background-color: var(--color5);
+    padding: 10px;
+    border-style: none;
+    border-radius: 10px;
+}

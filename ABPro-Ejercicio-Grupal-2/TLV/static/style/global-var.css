@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Jersey+15&display=swap');
+:root{
+    --color1: #978bc4; 	
+	--color2: #7465b1; 	
+	--color3: #523f9e; 	
+	--color4: #41327e; 	
+	--color5: #31255e;
+	--font1: #000000;
+	--font2: #ffffff;
+}
+
+body{
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    margin: 0px;
+    flex-direction: column;
+	background-color: #978bc4;
+}
+body.main-page{
+    justify-content: center;
+    align-items: center;
+}
+nav{
+    background-color: var(--color4);
+    width: 100%;
+    display: grid;
+    grid-template-columns: 20% 80%;
+    height: fit-content;
+}
+nav>div.navbar{
+    display: flex;
+    flex-direction: row-reverse;
+    gap: 10px;
+    margin: 0px 10px 0px;
+}
+.nav-option{
+    color: var(--font2);
+    width: 5vw;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Jersey 15", sans-serif;
+}
+.nav-option>svg{
+    width: 30%;
+}
+img.logo{
+    height: 10vh;
+}
