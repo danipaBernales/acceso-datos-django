@@ -1,0 +1,83 @@
+{%extends 'components/head.html'%}
+{%block content%}
+<body>
+    {%include 'components/nav.html'%}
+    {% load custom_filters %}
+    {%csrf_token%}
+    <h1>Carro de compras</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>PRODUCTO</th>
+                <th>PRECIO</th>
+                <th>CANTIDAD</th>
+                <TH>SUBTOTAL</TH>
+            </tr>
+        </thead>
+        <tbody style="text-align: center;">
+            
+            {%for product in shopping_cart%}
+                <tr>
+                    <td>{{product.product.name}}</td>
+                    <td>{{product.product.price}}</td>
+                    <td>{{product.quantity}}</td>
+                    {%with product.product.price|multiply:product.quantity as subtotal%}
+                    <td>{{subtotal}}</td>
+                    {%endwith%}
+                </tr>
+            {%endfor%}
+            <tr>
+                <td></td>
+                <td></td>
+                <td style="font-weight: bold;">TOTAL</td>
+                <td>{{total}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <label for="paying_method">Metodo de pago</label>
+    <select name="paying_method" id="paying-method">
+        {%for method in paying_method%}
+            <option value="{{method.id}}">{{method.name}}</option>
+        {%endfor%}
+    </select>
+    <label for="addresses">Dirección</label>
+    <select name="addresses" id="addresses">
+        {%for address in addresses%}
+            <option value="{{address.id}}">{{address.resume}}</option>
+        {%endfor%}
+    </select>
+    <h3>Fecha estimada de llegada: {{estimated_day}}</h3>
+    <button style="width: 20vw;" id="buy-btn">Comprar</button>
+</body>
+<script>
+const btn=document.getElementById("buy-btn")
+btn.addEventListener("click",()=>{
+    const response = fetch("/checkout/process",{
+        method: "POST",
+        credentials: "same-origin",
+        headers:{
+            "Content-Type": "application/json",
+            "X-CSRFToken": document.querySelector('input[name="csrfmiddlewaretoken"]').value
+        },
+        body:JSON.stringify({
+            paying_method:document.getElementById("paying-method").value,
+            address:document.getElementById("addresses").value
+        })
+    }).then(response => {
+            // Check if the request was successful
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            // Parse the response as JSON
+            return response.json();
+        })
+        .then(json=> {
+            console.log(json)
+            if (json.response){
+                window.location.href="/"
+            }
+        })
+})
+
+</script>
+{%endblock%}
