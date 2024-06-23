@@ -1,0 +1,48 @@
+{%extends 'components/head.html'%}
+{%block content%}
+<body>
+    {%include 'components/nav.html'%}
+    <h1 style="text-align: center;">Administración</h1>
+    <div class="wrapper" >
+        <div class="right-pos border-on"  >
+            <h1>Agregar Producto</h1>
+            <form action="" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="form_name" value="product" style="display: none;">
+                {%csrf_token%}
+                {{form.as_p}}
+                <input type="file" name="images" id="images" multiple>
+                <input class="btn" type="submit" value="agregar">
+            </form>
+        </div>
+        <div class="left-pos border-on">
+            <h1>Agregar Categoria</h1>
+            <form action="" method="post" >
+                <input type="hidden" name="form_name" value="category" style="display: none;">
+                {%csrf_token%}
+                {{category.as_p}}
+                <button type="submit" class="btn">Agregar</button>
+            </form>
+        </div>
+        <div class="left-pos border-on">
+            <h1>Agregar Tipo de producto</h1>
+            <form action="" method="post">
+                <input type="hidden" name="form_name" value="producttype" style="display: none;">
+                {%csrf_token%}
+                {{product.as_p}}
+                <button type="submit" class="btn">Agregar</button>
+            </form>
+        </div>
+        <div class="left-pos border-on">
+            <h1>Agregar Marca</h1>
+            <form action="" method="post">
+                <input type="hidden" name="form_name" value="brand" style="display: none;">
+                {%csrf_token%}
+                {{brand.as_p}}
+                <button type="submit" class="btn">Agregar</button>
+            </form>
+        </div>
+
+    </div>
+
+</body>
+{%endblock%}
