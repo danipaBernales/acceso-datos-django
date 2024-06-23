@@ -1,0 +1,63 @@
+{%extends 'components/head.html'%}
+{%block content%}
+<body>
+    {%include 'components/nav.html'%}
+    <h1>productos disponible</h1>
+    <div class="container">
+        {%csrf_token%}
+        {%for product in products%}
+        <div>
+            <h2>{{product.name}}</h2>
+            <img src="/media/default.jpg" alt="">
+            <h3>{{product.price}}</h3>
+            <label for="quantity-{{product.id}}">Cantidad</label>
+            <input type="number" id="quantity-{{product.id}}" style="width:5vw">
+            <button onclick="comprar({{product.id}})">comprar</button>
+        </div>
+        
+    {%endfor%}
+    </div>
+
+</body>
+
+<script>
+function comprar(product){
+    
+    const quantity=document.getElementById("quantity-"+product).value
+    const response = fetch("/checkout/buy",{
+        method: "POST",
+        credentials: "same-origin",
+        headers:{
+            "Content-Type": "application/json",
+            "X-CSRFToken": document.querySelector('input[name="csrfmiddlewaretoken"]').value
+        },
+        body:JSON.stringify({
+            product_id:product,
+            quantity:quantity
+        })
+    }).then(response => {
+            // Check if the request was successful
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            // Parse the response as JSON
+            return response.json();
+        })
+        .then(json=> {
+            console.log(json)
+            if (json.response){
+                document.getElementById("cart-count").text=json.len
+                document.getElementById("nav-cart").style.display=""
+            }
+        })
+}
+</script>
+<script type="module">
+    const cart=document.getElementById("nav-cart")
+    const cart_count=document.getElementById("cart-count").text
+    console.log(cart_count)
+    if (cart_count!="0"){
+        cart.style.display=""
+    }
+    </script>
+{%endblock%}
