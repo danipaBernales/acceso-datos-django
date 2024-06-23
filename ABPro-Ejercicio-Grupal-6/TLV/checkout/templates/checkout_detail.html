@@ -1,0 +1,14 @@
+{%extends 'components/head.html'%}
+{%block content%}
+<body>
+    {%include 'components/nav.html'%}
+    <h1>boleta {{ticket.id}}</h1>
+    <h2>fecha de compra: {{ticket.purchase_day}}</h2>
+    <h1>Detalle</h1>
+    {%for detail in ticket_details%}
+        <h3>{{detail.product.name}}|| {{detail.product.price}} || {{detail.quantity}}</h3>
+    {%endfor%}
+    <h4>estado {{ticket.status}}</h4>
+</body>
+
+{%endblock%}

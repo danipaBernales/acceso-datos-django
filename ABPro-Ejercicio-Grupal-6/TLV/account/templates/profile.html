@@ -1,0 +1,26 @@
+{%extends "components/head.html"%}
+
+{%block content%}
+{%include "components/nav.html"%}
+<div id="content" class="profile">
+    {%include "components/aside.html"%}
+    <main style="overflow-y: scroll;overflow-x: hidden;">
+            
+            <h1>Historial de pedidos</h1>
+            {%for element in history%}
+            <div>
+                <div>----------------------------------------------</div>
+                <h2>Identificador: {{element.id}}</h2>
+                {%if request.user.is_staff%}
+                    <h3>Comprador: {{element.username}}</h3>
+                {%endif%}
+                <h4>Estado: {{element.status.name}}</h4>
+                <a href="/checkout/detail/{{element.id}}">detalle</a>
+            </div>
+
+            {%endfor%}
+        
+  
+    </main>
+</div>
+{%endblock%}
