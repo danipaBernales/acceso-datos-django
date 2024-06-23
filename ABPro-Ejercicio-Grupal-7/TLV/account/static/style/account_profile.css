@@ -1,0 +1,26 @@
+@import url("/static/root/style/global-var.css");
+@import url('https://fonts.googleapis.com/css2?family=Jersey+15&display=swap');
+.profile{
+    background-color: var(--color4);
+    width: 98vw;
+    height: 88vh;
+    position: relative;
+    margin: 10px;
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: 20% 80%;
+}
+aside{
+    font-family: "Jersey 15", sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.aside-option{
+    text-decoration: none;
+    color: var(--font2);
+    padding: 3vh 10vh 3vh;
+}
+.aside-option:hover{
+    background-color: var(--color5);
+}

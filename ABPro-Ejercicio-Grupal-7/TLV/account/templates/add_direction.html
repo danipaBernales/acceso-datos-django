@@ -1,0 +1,12 @@
+{%extends "components/head.html"%}
+
+{%block content%}
+{%include "components/nav.html"%}
+<div id="content" class="profile">
+    {%include "components/aside.html"%}
+    <main>
+        <h1>Agregar dirección</h1>
+        {{forms.address.as_p}}
+    </main>
+</div>
+{%endblock%}
