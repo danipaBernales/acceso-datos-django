@@ -1,0 +1,115 @@
+{%extends 'components/head.html'%}
+{%block content%}
+<style>
+.row{
+    text-align: center;
+}
+</style>
+<body>
+    {%include 'components/nav.html'%}
+    <div id="content" class="profile">
+        {%include "components/aside.html"%}
+        <main>
+            <div style="display: flex;flex-direction: row;align-content: space-between; justify-content: space-between;
+            margin: 10px 32px 10px;">
+                <h1>Tomar Pedido</h1>
+                
+            </div>
+            
+            <h2>Agregar producto</h2>
+            <div style="display: flex;flex-direction: row;">
+                <select name="product" id="product">
+                    {%for product in products%}
+                    <option product-id="{{product.id}}" name="{{product.name}}" value="{{product.price}}">{{product.name}}</option>
+                    {%endfor%}
+                </select>
+                <label for="quantity">Cantidad</label>
+                <input type="number" id="quantity">
+                <button  id="btn-add" >Agregar</button>
+            </div>
+            <h2>Productos vendidos</h2>
+            <table id="boleta" style="width: 90%;">
+                <thead>
+                    <tr>
+                        <th>NOMBRE</th>
+                        <th>PRECIO UNITARIO</th>
+                        <th>CANTIDAD</th>
+                        <th>SUBTOTAL</th>
+                    </tr>
+                </thead>
+                <tbody id="table-body">
+                </tbody>
+            </table>     
+            <h1>Información del comprador</h1>
+            <input type="hidden" name="form_name" value="product" style="display: none;">
+            {%csrf_token%}
+            {{forms.anonymousorder.as_p}}
+            <button class="btn" id="buy">Comprar</button>
+        </main>
+    </div>
+
+</body>
+<script type="module">
+const buy=document.getElementById("buy")
+const btn=document.getElementById("btn-add")
+const table=document.getElementById("table-body")
+const item=document.getElementById("quantity")
+const products=document.getElementById("product")
+var purchase=[]
+btn.addEventListener("click",()=>{
+    let new_product=document.createElement("tr")
+    let name=document.createElement("td")
+    let price=document.createElement("td")
+    let quantity=document.createElement("td")
+    let subtotal=document.createElement("td")
+    
+    name.innerText=products.options[products.selectedIndex].text
+    price.innerText=products.value
+    quantity.innerText=item.value
+    subtotal.innerText=item.value*product.value
+    new_product.className="row"
+    new_product.appendChild(name)
+    new_product.appendChild(price)
+    new_product.appendChild(quantity)
+    new_product.appendChild(subtotal)
+
+    table.appendChild(new_product)
+    purchase.push(
+        {
+            id: products.options[products.selectedIndex].getAttribute("product-id"),
+            quantity: item.value
+        }
+    )
+})
+buy.addEventListener("click",()=>{
+    const response = fetch("/admin/submitOrder",{
+        method: "POST",
+        credentials: "same-origin",
+        headers:{
+            "Content-Type": "application/json",
+            "X-CSRFToken": document.querySelector('input[name="csrfmiddlewaretoken"]').value
+        },
+        body:JSON.stringify({
+            
+            username:document.getElementById("id_username").value,
+            paying_method: document.getElementById("id_paying_method").value,
+            address: document.getElementById("id_address").value,
+            purchase: purchase
+        })
+    }).then(response => {
+            // Check if the request was successful
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            // Parse the response as JSON
+            return response.json();
+        })
+        .then(json=> {
+            console.log(json)
+            if (json.purchase){
+                window.location.href="/account/profile"
+            }
+        })
+})
+</script>
+{%endblock%}
