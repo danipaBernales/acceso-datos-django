@@ -1,0 +1,12 @@
+<aside>
+    <img src="/media/default.jpg" alt="" srcset="">
+    <h3>{{request.user.first_name}} {{request.user.last_name}}</h3>
+    <div style="display: flex;flex-direction: column;">
+        {%if request.user.is_staff%}
+        <a class="aside-option" href="/admin/">Administración</a>
+        <a class="aside-option" href="/admin/takeOrder">Tomar Pedido</a>
+        {%else%}
+        <a class="aside-option" href="/account/add_direction">Añadir dirección</a>
+        {%endif%}
+    </div>
+</aside>
