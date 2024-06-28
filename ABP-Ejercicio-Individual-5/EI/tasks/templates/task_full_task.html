@@ -1,0 +1,27 @@
+{%include 'components/head.html'%}
+<body>
+    {%load filters%}
+    {%include 'components/nav.html'%}
+    <div style="display: flex; flex-direction: row; justify-content: space-between;padding: 0px 10px 0px;">
+        
+        <a href="./{{task.title}}/borrar">borrar</a>
+        <a href="./{{task.title}}/editar">Editar</a>
+        <a href="./{{task.title}}/marcar">marcar como completado</a>
+    </div>
+    <div class="full-view">
+        <div class="task" style="position: relative; background-color: {{task.tag.color}}91;">
+            <h1>{{task.title}}</h1>
+            <h2>{{task.content}}</h2>
+            <h3>Status: {{task.status}}</h3>
+            {%if task.expire_date|is_expired%}
+                <h1 class="expired" style="color:  {{task.tag.color}};">Atrasado</h1>
+            {%endif%}
+            <h1></h1>
+            <div class="task-footer">
+                <h4>{{task.tag.name}}</h4>
+                <h4>Fecha limite: {{task.expire_date}}</h4>
+            </div>
+        </div>
+
+    </div>
+</body>
