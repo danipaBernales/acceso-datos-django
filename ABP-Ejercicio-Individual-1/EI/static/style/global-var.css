@@ -1,0 +1,15 @@
+:root{
+    --font-color: #275f96;
+    --background-color: #ffdbe2;
+    --secondary-color:#92b9dd;
+    --tercionary-color:#ff8181;
+    --darker-tone-color:#9b9fab;
+}
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    margin: 0px;
+}
