@@ -1,0 +1,24 @@
+{%include 'components/head.html'%}
+<body>
+    
+    {%include 'components/nav.html'%}
+    <h1 style="text-align: center;">Lista de tareas</h1>
+    {%if Task%}
+        {%for task in Task%}
+            <div class="task" style="background-color: {{task.tag.color}};">
+                <h1>{{task.title}}</h1>
+                <h2>{{task.content}}</h2>
+                <h3>Status: {{task.status}}</h3>
+                <div class="task-footer">
+                    <h4>{{task.tag.name}}</h4>
+                    <h4>Fecha limite: {{task.expire_date}}</h4>
+                </div>
+            </div>
+
+        {%endfor%}
+    {%else%}
+    <h1>No hay tareas</h1>
+    {%endif%}
+
+</body>
+</html>
