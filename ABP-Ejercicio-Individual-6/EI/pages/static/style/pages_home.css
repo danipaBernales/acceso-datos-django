@@ -1,0 +1,25 @@
+@import url("/static/root/style/global-var.css");
+@import url('https://fonts.googleapis.com/css2?family=Jersey+15&display=swap');
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    margin: 0px;
+    background-color: var(--background-color);
+}
+.container{
+    display: flex;
+    flex-direction: column;
+}
+.container a{
+    text-align: center;
+    text-decoration: none;
+    color: var(--font-color);
+    font-family: "Jersey 15", sans-serif;
+    font-size: 2vw;
+}
+img.logo{
+    height: 30vh;
+}
