@@ -1,0 +1,48 @@
+@import url("/static/root/style/global-var.css");
+@import url('https://fonts.googleapis.com/css2?family=Jersey+15&display=swap');
+body{
+    background-color: var(--background-color);
+    display: block;
+    font-family: "Jersey 15", sans-serif;
+}
+nav{
+
+}
+
+.task-footer{
+    margin: 1vw;
+    display: flex;
+    justify-content: space-between;
+}
+.task{
+    padding: 0vh 1vw 0vh;
+    margin: 2vh 2vw 2vh;
+    border-radius: 10px;
+}
+.expired{
+    position: absolute;
+    z-index: -8;
+    font-size: 10vw;
+    top: -14vh;
+}
+.simplified{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between; 
+    position: relative;
+}
+.option-task{
+    padding: 0px 10px 0px; 
+    display: flex; 
+    flex-direction: row; 
+    justify-content: space-between;
+}
+.task-actions{
+    display: flex;
+    flex-direction: row;
+    padding: 2vh;
+    gap: 1vh;
+}
+.task-actions svg{
+    height: 4vh;
+}
