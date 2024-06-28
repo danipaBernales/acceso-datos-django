@@ -1,0 +1,12 @@
+{%include 'components/head.html'%}
+<body>
+    {%include 'components/nav.html'%}
+    <h1>{{action_taken}}</h1>
+    <form action="/tasks/new_task" method="POST">
+        {% csrf_token %}
+        {{form.as_p}}
+        <div class="bottom-layer">
+            <button type="submit">crear</button>
+        </div>
+    </form>
+</body>
